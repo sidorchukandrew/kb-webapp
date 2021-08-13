@@ -30,7 +30,7 @@ export default function EventsIndexPage() {
 			<Title className="flex-between">
 				Events
 				<Link to="/events/new" style={{ textDecoration: "none" }}>
-					<Button color="primary" variant="contained">
+					<Button color="primary" variant="contained" disableElevation>
 						Record an event
 					</Button>
 				</Link>

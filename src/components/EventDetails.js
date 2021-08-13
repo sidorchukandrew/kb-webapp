@@ -23,17 +23,16 @@ export default function EventDetails({ event }) {
 				</Card>
 				<Card title="Financials">
 					<Data label="Total revenue:" data={"$ " + formatCurrency(event.revenue)} />
-					<Data
-						label="Business account (50%):"
-						data={"$ " + formatCurrency(calculations?.businessAccountAmount)}
-					/>
-
 					{calculations?.eventCost && (
 						<Data
 							label={`Event cost ${calculations.eventCostLabel}:`}
 							data={"$" + formatCurrency(calculations?.eventCost)}
 						/>
 					)}
+					<Data
+						label="Business account (50%):"
+						data={"$ " + formatCurrency(calculations?.businessAccountAmount)}
+					/>
 
 					{calculations?.deliveryFee && (
 						<Data

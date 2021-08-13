@@ -37,7 +37,11 @@ function calculatePercentage(percent, total) {
 }
 
 export function hasEventCost(form) {
-	return form && ("event_cost_percentage" in form || "event_cost_flat_fee" in form);
+	return (
+		form &&
+		("event_cost_percentage" in form || "event_cost_flat_fee" in form) &&
+		(form.event_cost_percentage || form.event_cost_flat_fee)
+	);
 }
 
 export function formatCurrency(number) {
@@ -46,7 +50,7 @@ export function formatCurrency(number) {
 }
 
 export function hasDeliveryFee(form) {
-	return form && "delivery_fee" in form;
+	return form && "delivery_fee" in form && form.delivery_fee;
 }
 
 export function toChartData(calculations, form) {

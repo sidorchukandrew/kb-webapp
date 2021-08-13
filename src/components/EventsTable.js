@@ -41,6 +41,11 @@ export default function EventsTable({ events }) {
 					))}
 				</TableBody>
 			</Table>
+			{events.length === 0 && (
+				<div className="flex-center py-6 font-semibold text-gray-400">
+					No events have been added yet
+				</div>
+			)}
 		</TableContainer>
 	);
 }

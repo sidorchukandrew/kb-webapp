@@ -18,4 +18,8 @@ export default class EventsApi {
 	static updateOne(id, updates) {
 		return axios.put(`${EVENTS_URL}/${id}`, updates);
 	}
+
+	static deleteOne(id) {
+		return axios.delete(`${EVENTS_URL}/${id}`);
+	}
 }

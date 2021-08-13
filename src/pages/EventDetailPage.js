@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import DeleteEventDialog from "../dialogs/DeleteEventDialog";
+import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import EditEventDialog from "../dialogs/EditEventDialog";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import EventDetails from "../components/EventDetails";
@@ -13,6 +15,7 @@ export default function EventDetailPage() {
 	const [loading, setLoading] = useState(true);
 	const [event, setEvent] = useState();
 	const [editing, setEditing] = useState(false);
+	const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
 	const id = useParams().id;
 
@@ -38,9 +41,15 @@ export default function EventDetailPage() {
 			<Loader loading={loading && !event}>
 				<Title className="flex-between">
 					{event?.description}
-					<IconButton onClick={() => setEditing(true)}>
-						<EditRoundedIcon />
-					</IconButton>
+
+					<span>
+						<IconButton onClick={() => setEditing(true)}>
+							<EditRoundedIcon />
+						</IconButton>
+						<IconButton onClick={() => setShowDeleteConfirmation(true)}>
+							<DeleteRoundedIcon />
+						</IconButton>
+					</span>
 				</Title>
 				<EventDetails event={event} />
 				<EditEventDialog
@@ -48,6 +57,10 @@ export default function EventDetailPage() {
 					open={editing}
 					onClose={() => setEditing(false)}
 					onSaved={setEvent}
+				/>
+				<DeleteEventDialog
+					open={showDeleteConfirmation}
+					onClose={() => setShowDeleteConfirmation(false)}
 				/>
 			</Loader>
 		</div>
