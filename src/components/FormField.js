@@ -1,10 +1,18 @@
+import { InputAdornment, makeStyles } from "@material-ui/core";
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 import DayJsUtils from "@date-io/dayjs";
-import { InputAdornment } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 
-export default function FormField({ label, type, onChange, value, icon }) {
+const useStyles = makeStyles({
+	root: {
+		background: "white",
+	},
+});
+
+export default function FormField({ label, type, onChange, value, icon, className }) {
+	const classes = useStyles();
+
 	if (type === "date") {
 		return (
 			<div className="mb-4">
@@ -21,8 +29,9 @@ export default function FormField({ label, type, onChange, value, icon }) {
 		);
 	} else {
 		return (
-			<div className="mb-4 w-full">
+			<div className={`w-full ${className}`}>
 				<TextField
+					className={classes.root}
 					variant="outlined"
 					color="secondary"
 					label={label}
@@ -41,4 +50,5 @@ export default function FormField({ label, type, onChange, value, icon }) {
 
 FormField.defaultProps = {
 	type: "text",
+	className: "mb-4",
 };

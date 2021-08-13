@@ -14,7 +14,7 @@ export default function NewEventReview({ form }) {
 			<Card className="mb-4" title="Details">
 				<Data label="Workers:" data={form.workers.join(", ")} />
 				<Data label="Description of event:" data={form.description} />
-				<Data label="Date:" data={form.date?.toDateString()} />
+				<Data label="Date:" data={form.event_date?.toDateString()} />
 			</Card>
 
 			<Card title="Financials">

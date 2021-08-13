@@ -1,5 +1,7 @@
+import EventForm from "../components/EventForm";
+import EventsApi from "../api/EventsApi";
 import FormNav from "../components/FormNav";
-import NewEventForm from "../components/NewEventForm";
+import Loader from "../components/Loader";
 import NewEventReview from "../components/NewEventReview";
 import Title from "../components/Title";
 import { useHistory } from "react-router-dom";
@@ -9,6 +11,7 @@ export default function NewEventPage() {
 	const router = useHistory();
 	const [formStep, setFormStep] = useState(0);
 	const [form, setForm] = useState({ workers: [] });
+	const [submitting, setSubmitting] = useState(false);
 
 	const handleFormFieldChange = (field, value) => {
 		setForm((currentForm) => ({ ...currentForm, [field]: value }));
@@ -18,7 +21,7 @@ export default function NewEventPage() {
 	switch (formStep) {
 		case 0:
 			formContent = (
-				<NewEventForm form={form} onFieldChange={handleFormFieldChange} onFormChange={setForm} />
+				<EventForm form={form} onFieldChange={handleFormFieldChange} onFormChange={setForm} />
 			);
 			break;
 		case 1:
@@ -39,17 +42,31 @@ export default function NewEventPage() {
 
 	const handleNextPress = () => {
 		if (formStep === 1) {
-			console.log("Submitting");
+			handleSubmit();
 		} else {
 			setFormStep((currentStep) => currentStep + 1);
+		}
+	};
+
+	const handleSubmit = async () => {
+		setSubmitting(true);
+		try {
+			let { data } = await EventsApi.createOne(form);
+			router.push(`/events`);
+		} catch (error) {
+			console.log(error);
+			setSubmitting(false);
+		} finally {
 		}
 	};
 
 	return (
 		<div>
 			<Title>New Event</Title>
-			{formContent}
-			<FormNav formStep={formStep} onBackPress={handleBackPress} onNextPress={handleNextPress} />
+			<Loader fullscreen loading={submitting}>
+				{formContent}
+				<FormNav formStep={formStep} onBackPress={handleBackPress} onNextPress={handleNextPress} />
+			</Loader>
 		</div>
 	);
 }

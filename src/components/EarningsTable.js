@@ -1,9 +1,12 @@
 import { formatCurrency, getWorkerGroups, hasDeliveryFee } from "../utils/financial";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function EarningsTable({ form, calculations }) {
-	const [workerGroups] = useState(() => getWorkerGroups(form));
+	const [workerGroups, setWorkerGroups] = useState(() => getWorkerGroups(form));
+
+	useEffect(() => {
+		setWorkerGroups(getWorkerGroups(form));
+	}, [form]);
 
 	const calculateSplitEarnings = () => {
 		return Number.parseFloat(calculations?.revenueAfterDeliveryFee / workerGroups.length);

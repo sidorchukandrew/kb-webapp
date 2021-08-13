@@ -6,7 +6,7 @@ import FormSelect from "./FormSelect";
 import HideableField from "./HideableField";
 import { useState } from "react";
 
-export default function NewEventForm({ form, onFieldChange, onFormChange }) {
+export default function EventForm({ form, onFieldChange, onFormChange, onFieldDeleted }) {
 	const [hiddenFields, setHiddenFields] = useState(() => {
 		return { delivery: !hasDeliveryFee(form), event_cost: !hasEventCost(form) };
 	});
@@ -21,6 +21,9 @@ export default function NewEventForm({ form, onFieldChange, onFormChange }) {
 			keys.forEach((key) => {
 				if (key.indexOf(field) > -1) {
 					delete formCopy[key];
+					if (onFieldDeleted) {
+						onFieldDeleted(key);
+					}
 				}
 			});
 
@@ -35,7 +38,7 @@ export default function NewEventForm({ form, onFieldChange, onFormChange }) {
 			<FormSelect
 				label="Workers"
 				options={WORKERS}
-				value={form.workers}
+				value={form.workers || form.users}
 				onChange={(e) => onFieldChange("workers", e)}
 				multi
 			/>
@@ -49,27 +52,30 @@ export default function NewEventForm({ form, onFieldChange, onFormChange }) {
 				type="number"
 				onChange={(e) => onFieldChange("revenue", e)}
 				value={form.revenue ? form.revenue : ""}
+				icon="$"
 			/>
 			<HideableField
 				label="Event Cost"
 				hidden={hiddenFields.event_cost}
 				onToggle={() => handleToggleHiddenField("event_cost")}
 			>
-				<div className="flex-between gap-6">
+				<div className="grid sm:flex sm:items-center sm:justify-between gap-2 sm:gap-6">
 					<FormField
 						label="Flat fee"
 						type="number"
 						onChange={(e) => onFieldChange("event_cost_flat_fee", e)}
 						value={form.event_cost_flat_fee ? form.event_cost_flat_fee : ""}
 						icon="$"
+						className="mb-0"
 					/>
-					<div>OR</div>
+					<div className="flex-center my-3 sm:my-0">OR</div>
 					<FormField
 						label="Percentage of total"
 						type="number"
 						onChange={(e) => onFieldChange("event_cost_percentage", e)}
 						value={form.event_cost_percentage ? form.event_cost_percentage : ""}
 						icon="%"
+						className="mb-0"
 					/>
 				</div>
 			</HideableField>
@@ -77,8 +83,8 @@ export default function NewEventForm({ form, onFieldChange, onFormChange }) {
 			<FormField
 				label="Date"
 				type="date"
-				onChange={(e) => onFieldChange("date", e)}
-				value={form.date ? form.date : new Date()}
+				onChange={(e) => onFieldChange("event_date", e)}
+				value={form.event_date ? form.event_date : new Date()}
 			/>
 
 			<HideableField
@@ -91,6 +97,7 @@ export default function NewEventForm({ form, onFieldChange, onFormChange }) {
 					value={form.delivery_fee ? form.delivery_fee : ""}
 					onChange={(e) => onFieldChange("delivery_fee", e)}
 					type="number"
+					icon="$"
 				/>
 
 				<FormSelect

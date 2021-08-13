@@ -34,7 +34,7 @@ export default function CalculationsChart({ data }) {
 					</PieChart>
 				</ResponsiveContainer>
 			</div>
-			<div className="flex justify-start items-center col-span-1 text-lg font-semibold">
+			<div className="flex justify-center sm:justify-start items-center col-span-1 text-lg font-semibold">
 				{selectedSegment}
 			</div>
 		</div>

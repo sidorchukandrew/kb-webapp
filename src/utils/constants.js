@@ -22,3 +22,5 @@ export const PIE_CHART_COLORS = {
 	"Paul's earnings": "#ffa600",
 	"Delivery fee (Paul)": "#ffa600",
 };
+
+export const API_URL = process.env.REACT_APP_API_URL;

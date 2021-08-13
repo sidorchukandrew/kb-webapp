@@ -4,7 +4,7 @@ export function performCalculations(form) {
 	if (hasEventCost(form)) {
 		if (form.event_cost_percentage) {
 			calculations.eventCost = calculatePercentage(form.event_cost_percentage, form.revenue);
-			calculations.eventCostLabel = ` (${form.event_cost_percentage}%)`;
+			calculations.eventCostLabel = ` (${Number.parseFloat(form.event_cost_percentage)}%)`;
 		} else {
 			calculations.eventCost = Number.parseFloat(form.event_cost_flat_fee);
 			calculations.eventCostLabel = ` (flat fee)`;
@@ -81,7 +81,7 @@ export function toChartData(calculations, form) {
 export function getWorkerGroups(form) {
 	let groups = [];
 
-	let workers = form.workers;
+	let workers = form.workers || form.users;
 
 	if (workers.includes("Andrew") || workers.includes("Tayeesa")) {
 		groups.push("Andrew & Tayeesa");

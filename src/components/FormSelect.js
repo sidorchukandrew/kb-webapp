@@ -5,12 +5,20 @@ import {
 	ListItemText,
 	MenuItem,
 	Select,
+	makeStyles,
 } from "@material-ui/core";
 
+const useStyles = makeStyles({
+	root: {
+		background: "white",
+	},
+});
 export default function FormSelect({ label, onChange, options, value, multi }) {
+	const classes = useStyles();
+
 	return (
 		<div className="mb-4">
-			<FormControl variant="outlined" color="secondary" fullWidth>
+			<FormControl variant="outlined" color="secondary" fullWidth className={classes.root}>
 				<InputLabel id="select-label">{label}</InputLabel>
 				<Select
 					multiple={multi}

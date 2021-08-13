@@ -9,7 +9,7 @@ export default function HideableField({ hidden, label, onToggle, children }) {
 				labelPlacement="start"
 			/>
 
-			{!hidden && <div className="mt-4">{children}</div>}
+			{!hidden && <div className="mt-4 py-4 px-2 bg-blue-50 rounded-md">{children}</div>}
 		</div>
 	);
 }
