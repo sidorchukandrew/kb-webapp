@@ -23,6 +23,7 @@ export default function FormField({ label, type, onChange, value, icon, classNam
 						fullWidth
 						onChange={(e) => onChange(new Date(e))}
 						value={value}
+						clearable
 					/>
 				</MuiPickersUtilsProvider>
 			</div>
@@ -42,6 +43,7 @@ export default function FormField({ label, type, onChange, value, icon, classNam
 					InputProps={
 						icon && { startAdornment: <InputAdornment position="start">{icon}</InputAdornment> }
 					}
+					multiline={type === "text"}
 				/>
 			</div>
 		);

@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/financial";
 import { getNamesFromUsers } from "../utils/models";
 import { order } from "../utils/compare";
+import { toDate } from "../utils/date";
 import { useState } from "react";
 
 export default function EventsTable({ events }) {
@@ -97,7 +98,7 @@ export default function EventsTable({ events }) {
 								</TableCell>
 							)}
 							<TableCell scope="row">
-								<Link to={`/events/${event.id}`}>{new Date(event.event_date).toDateString()}</Link>
+								<Link to={`/events/${event.id}`}>{toDate(event.event_date)}</Link>
 							</TableCell>
 							<TableCell>
 								<Link to={`/events/${event.id}`}>{event.description}</Link>

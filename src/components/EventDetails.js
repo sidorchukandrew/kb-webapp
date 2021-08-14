@@ -1,7 +1,7 @@
 import { formatCurrency, performCalculations, toChartData } from "../utils/financial";
 import { useEffect, useState } from "react";
 
-import CalculationsChart from "./CalculationsChart";
+import CalculationsChart from "../charts/CalculationsChart";
 import Card from "./Card";
 import { Checkbox } from "@material-ui/core";
 import Data from "./Data";

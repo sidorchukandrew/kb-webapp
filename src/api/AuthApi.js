@@ -7,6 +7,10 @@ export default class AuthApi {
 		return axios.post(API_URL + "/login", { name, password });
 	}
 
+	static checkCredentials(name, password) {
+		return axios.post(API_URL + "/check_credentials", { name, password });
+	}
+
 	static updatePassword(password) {
 		return axios.put(API_URL + "/password", { password }, { headers: constructAuthHeader() });
 	}

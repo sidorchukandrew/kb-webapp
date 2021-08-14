@@ -1,6 +1,6 @@
 import { formatCurrency, performCalculations, toChartData } from "../utils/financial";
 
-import CalculationsChart from "./CalculationsChart";
+import CalculationsChart from "../charts/CalculationsChart";
 import Card from "./Card";
 import Data from "./Data";
 import EarningsTable from "./EarningsTable";

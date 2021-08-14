@@ -32,6 +32,7 @@ export default function Navbar() {
 					<div>
 						<NavbarLink to="/">Home</NavbarLink>
 						<NavbarLink to="/events">Events</NavbarLink>
+						<NavbarLink to="/expenses">Expenses</NavbarLink>
 					</div>
 					<Button variant="outlined" className={classes.colors} onClick={handleLogout}>
 						Log Out

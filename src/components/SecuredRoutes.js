@@ -5,9 +5,11 @@ import AuthApi from "../api/AuthApi";
 import { CircularProgress } from "@material-ui/core";
 import EventDetailPage from "../pages/EventDetailPage";
 import EventsIndexPage from "../pages/EventsIndexPage";
+import ExpensesIndexPage from "../pages/ExpensesIndexPage";
 import HomePage from "../pages/HomePage";
 import Layout from "./Layout";
 import NewEventPage from "../pages/NewEventPage";
+import NewExpensePage from "../pages/NewExpensePage";
 import NewPasswordDialog from "../dialogs/NewPasswordDialog";
 import { isFirstLogin } from "../utils/auth";
 
@@ -21,7 +23,7 @@ export default function SecuredRoutes() {
 			try {
 				let name = localStorage.getItem("name");
 				let password = localStorage.getItem("password");
-				let { data } = await AuthApi.login(name, password);
+				let { data } = await AuthApi.checkCredentials(name, password);
 
 				setShowPasswordDialog(isFirstLogin(data));
 				setAuthenticating(false);
@@ -51,6 +53,12 @@ export default function SecuredRoutes() {
 					</Route>
 					<Route path="/events/:id" exact>
 						<EventDetailPage />
+					</Route>
+					<Route path="/expenses" exact>
+						<ExpensesIndexPage />
+					</Route>
+					<Route path="/expenses/new" exact>
+						<NewExpensePage />
 					</Route>
 					<Route path="/" exact>
 						<HomePage />
