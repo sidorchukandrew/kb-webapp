@@ -37,12 +37,12 @@ export default function EventDetailPage() {
 	}, [id]);
 
 	return (
-		<div className="my-10">
+		<div className="my-4 sm:my-10">
 			<Loader loading={loading && !event}>
 				<Title className="flex-between">
 					{event?.description}
 
-					<span>
+					<span className="w-32">
 						<IconButton onClick={() => setEditing(true)}>
 							<EditRoundedIcon />
 						</IconButton>

@@ -32,7 +32,7 @@ export default function LoginPage() {
 
 	return (
 		<Loader fullscreen loading={loggingIn}>
-			<div className="min-h-screen mx-auto max-w-lg flex-center flex-col">
+			<div className="min-h-screen mx-auto max-w-lg flex-center flex-col px-2">
 				<Title className="mb-4">Login</Title>
 
 				<FormField label="Name" value={name} onChange={setName} />

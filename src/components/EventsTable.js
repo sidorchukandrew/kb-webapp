@@ -6,6 +6,7 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
+	useMediaQuery,
 } from "@material-ui/core";
 
 import { Link } from "react-router-dom";
@@ -13,16 +14,17 @@ import { formatCurrency } from "../utils/financial";
 import { getNamesFromUsers } from "../utils/models";
 
 export default function EventsTable({ events }) {
+	const isSmallScreen = useMediaQuery("(max-width: 640px)");
 	return (
 		<TableContainer>
 			<Table>
 				<TableHead>
 					<TableRow>
-						<TableCell>Paid Out</TableCell>
+						{!isSmallScreen && <TableCell>Paid Out</TableCell>}
 						<TableCell>Date</TableCell>
 						<TableCell>Description</TableCell>
 						<TableCell>Revenue</TableCell>
-						<TableCell>Earnings (per group)</TableCell>
+						{!isSmallScreen && <TableCell>Earnings (per group)</TableCell>}
 						<TableCell>Workers</TableCell>
 					</TableRow>
 				</TableHead>
@@ -30,9 +32,11 @@ export default function EventsTable({ events }) {
 				<TableBody>
 					{events.map((event) => (
 						<TableRow key={event.id} hover>
-							<TableCell>
-								<Checkbox checked={event.is_paid_out} disabled />
-							</TableCell>
+							{!isSmallScreen && (
+								<TableCell>
+									<Checkbox checked={event.is_paid_out} disabled />
+								</TableCell>
+							)}
 							<TableCell scope="row">
 								<Link to={`/events/${event.id}`}>{new Date(event.event_date).toDateString()}</Link>
 							</TableCell>
@@ -42,9 +46,13 @@ export default function EventsTable({ events }) {
 							<TableCell>
 								<Link to={`/events/${event.id}`}>${formatCurrency(event.revenue)}</Link>
 							</TableCell>
-							<TableCell>
-								<Link to={`/events/${event.id}`}>${formatCurrency(event.earnings_per_group)}</Link>
-							</TableCell>
+							{!isSmallScreen && (
+								<TableCell>
+									<Link to={`/events/${event.id}`}>
+										${formatCurrency(event.earnings_per_group)}
+									</Link>
+								</TableCell>
+							)}
 							<TableCell>
 								<Link to={`/events/${event.id}`}>{getNamesFromUsers(event.users)}</Link>
 							</TableCell>
