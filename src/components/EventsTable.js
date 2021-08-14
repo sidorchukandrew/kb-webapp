@@ -6,14 +6,39 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
+	TableSortLabel,
 	useMediaQuery,
 } from "@material-ui/core";
 
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/financial";
 import { getNamesFromUsers } from "../utils/models";
+import { order } from "../utils/compare";
+import { useState } from "react";
 
 export default function EventsTable({ events }) {
+	const [orderBy, setOrderBy] = useState();
+	const [orderDirection, setOrderDirection] = useState();
+
+	const handleOrderBy = (field) => {
+		setOrderBy(field);
+		setOrderDirection((currentDirection) => {
+			if (field === orderBy) {
+				return currentDirection === "asc" ? "desc" : "asc";
+			} else {
+				return "asc";
+			}
+		});
+	};
+
+	const orderEvents = () => {
+		if (orderBy && orderDirection) {
+			return order(events, orderBy, orderDirection);
+		} else {
+			return events;
+		}
+	};
+
 	const isSmallScreen = useMediaQuery("(max-width: 640px)");
 	return (
 		<TableContainer>
@@ -21,16 +46,50 @@ export default function EventsTable({ events }) {
 				<TableHead>
 					<TableRow>
 						{!isSmallScreen && <TableCell>Paid Out</TableCell>}
-						<TableCell>Date</TableCell>
-						<TableCell>Description</TableCell>
-						<TableCell>Revenue</TableCell>
-						{!isSmallScreen && <TableCell>Earnings (per group)</TableCell>}
+						<TableCell sortDirection="asc">
+							<TableSortLabel
+								onClick={() => handleOrderBy("event_date")}
+								active={orderBy === "event_date"}
+								direction={orderDirection}
+							>
+								Date
+							</TableSortLabel>
+						</TableCell>
+						<TableCell>
+							<TableSortLabel
+								onClick={() => handleOrderBy("description")}
+								active={orderBy === "description"}
+								direction={orderDirection}
+							>
+								Description
+							</TableSortLabel>
+						</TableCell>
+						<TableCell>
+							<TableSortLabel
+								onClick={() => handleOrderBy("revenue")}
+								active={orderBy === "revenue"}
+								direction={orderDirection}
+							>
+								Revenue
+							</TableSortLabel>
+						</TableCell>
+						{!isSmallScreen && (
+							<TableCell>
+								<TableSortLabel
+									onClick={() => handleOrderBy("earnings_per_group")}
+									active={orderBy === "earnings_per_group"}
+									direction={orderDirection}
+								>
+									Earnings (per group)
+								</TableSortLabel>
+							</TableCell>
+						)}
 						<TableCell>Workers</TableCell>
 					</TableRow>
 				</TableHead>
 
 				<TableBody>
-					{events.map((event) => (
+					{orderEvents().map((event) => (
 						<TableRow key={event.id} hover>
 							{!isSmallScreen && (
 								<TableCell>

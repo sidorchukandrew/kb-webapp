@@ -27,7 +27,7 @@ export default function EventsIndexPage() {
 	}, []);
 	return (
 		<div>
-			<Title className="flex-between">
+			<Title className="flex-between mb-4">
 				Events
 				<Link to="/events/new" style={{ textDecoration: "none" }}>
 					<Button color="primary" variant="contained" disableElevation>
