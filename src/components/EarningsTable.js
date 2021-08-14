@@ -2,6 +2,7 @@ import { formatCurrency, getWorkerGroups, hasDeliveryFee } from "../utils/financ
 import { useEffect, useState } from "react";
 
 export default function EarningsTable({ form, calculations }) {
+	console.log(calculations);
 	const [workerGroups, setWorkerGroups] = useState(() => getWorkerGroups(form));
 
 	useEffect(() => {
@@ -9,7 +10,7 @@ export default function EarningsTable({ form, calculations }) {
 	}, [form]);
 
 	const calculateSplitEarnings = () => {
-		return Number.parseFloat(calculations?.revenueAfterDeliveryFee / workerGroups.length);
+		return Number.parseFloat(calculations?.revenueAfterBusinessAccount / workerGroups.length);
 	};
 
 	const isDeliveryDriver = (group) => {

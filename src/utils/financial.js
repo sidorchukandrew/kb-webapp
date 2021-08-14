@@ -12,7 +12,7 @@ export function performCalculations(form) {
 
 		calculations.revenueAfterEventCost = form.revenue - calculations.eventCost;
 	} else {
-		calculations.revenueAfterEventCost = form.revenue;
+		calculations.revenueAfterEventCost = Number.parseFloat(form.revenue);
 	}
 
 	if (hasDeliveryFee(form)) {
@@ -30,9 +30,7 @@ export function performCalculations(form) {
 	);
 
 	calculations.revenueAfterBusinessAccount =
-		calculations.revenueAfterEventCost -
-		calculations.businessAccountAmount -
-		calculations.revenueAfterDeliveryFee;
+		calculations.revenueAfterDeliveryFee - calculations.businessAccountAmount;
 
 	return calculations;
 }
