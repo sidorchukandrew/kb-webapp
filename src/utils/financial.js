@@ -15,19 +15,24 @@ export function performCalculations(form) {
 		calculations.revenueAfterEventCost = form.revenue;
 	}
 
-	calculations.businessAccountAmount = calculatePercentage(50, calculations.revenueAfterEventCost);
-
-	calculations.revenueAfterBusinessAccount =
-		calculations.revenueAfterEventCost - calculations.businessAccountAmount;
-
 	if (hasDeliveryFee(form)) {
 		calculations.deliveryFee = form.delivery_fee;
 		calculations.revenueAfterDeliveryFee =
-			calculations.revenueAfterBusinessAccount - calculations.deliveryFee;
+			calculations.revenueAfterEventCost - calculations.deliveryFee;
 		calculations.deliveryFeeLabel = `(${form.delivery_driver})`;
 	} else {
-		calculations.revenueAfterDeliveryFee = calculations.revenueAfterBusinessAccount;
+		calculations.revenueAfterDeliveryFee = calculations.revenueAfterEventCost;
 	}
+
+	calculations.businessAccountAmount = calculatePercentage(
+		50,
+		calculations.revenueAfterDeliveryFee
+	);
+
+	calculations.revenueAfterBusinessAccount =
+		calculations.revenueAfterEventCost -
+		calculations.businessAccountAmount -
+		calculations.revenueAfterDeliveryFee;
 
 	return calculations;
 }

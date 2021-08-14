@@ -27,17 +27,17 @@ export default function NewEventReview({ form }) {
 					/>
 				)}
 
-				<Data
-					label="Business account (50%):"
-					data={"$ " + formatCurrency(calculations?.businessAccountAmount)}
-				/>
-
 				{calculations?.deliveryFee && (
 					<Data
 						label={`Delivery fee ${calculations.deliveryFeeLabel}:`}
 						data={"$ " + formatCurrency(calculations?.deliveryFee)}
 					/>
 				)}
+
+				<Data
+					label="Business account (50%):"
+					data={"$ " + formatCurrency(calculations?.businessAccountAmount)}
+				/>
 
 				<Data
 					label="Earnings:"

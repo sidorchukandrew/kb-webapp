@@ -47,10 +47,6 @@ export default function EventDetails({ event, onEventUpdated }) {
 							data={"$" + formatCurrency(calculations?.eventCost)}
 						/>
 					)}
-					<Data
-						label="Business account (50%):"
-						data={"$ " + formatCurrency(calculations?.businessAccountAmount)}
-					/>
 
 					{calculations?.deliveryFee && (
 						<Data
@@ -58,6 +54,10 @@ export default function EventDetails({ event, onEventUpdated }) {
 							data={"$ " + formatCurrency(calculations?.deliveryFee)}
 						/>
 					)}
+					<Data
+						label="Business account (50%):"
+						data={"$ " + formatCurrency(calculations?.businessAccountAmount)}
+					/>
 
 					<Data
 						label="Earnings:"
