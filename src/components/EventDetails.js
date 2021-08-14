@@ -61,7 +61,7 @@ export default function EventDetails({ event, onEventUpdated }) {
 
 					<Data
 						label="Earnings:"
-						data={"$" + formatCurrency(calculations?.revenueAfterDeliveryFee)}
+						data={"$" + formatCurrency(calculations?.revenueAfterBusinessAccount)}
 					/>
 
 					<EarningsTable form={event} calculations={calculations} />
