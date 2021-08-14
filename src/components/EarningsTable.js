@@ -2,7 +2,6 @@ import { formatCurrency, getWorkerGroups, hasDeliveryFee } from "../utils/financ
 import { useEffect, useState } from "react";
 
 export default function EarningsTable({ form, calculations }) {
-	console.log(calculations);
 	const [workerGroups, setWorkerGroups] = useState(() => getWorkerGroups(form));
 
 	useEffect(() => {
