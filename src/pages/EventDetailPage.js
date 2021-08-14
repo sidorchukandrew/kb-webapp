@@ -42,7 +42,7 @@ export default function EventDetailPage() {
 				<Title className="flex-between">
 					{event?.description}
 
-					<span className="w-32">
+					<span className="w-32 flex justify-end items-center">
 						<IconButton onClick={() => setEditing(true)}>
 							<EditRoundedIcon />
 						</IconButton>
