@@ -70,7 +70,7 @@ export function toChartData(calculations, form) {
 
 	let groups = getWorkerGroups(form);
 
-	let groupEarning = calculations.revenueAfterDeliveryFee / groups.length;
+	let groupEarning = calculations.revenueAfterBusinessAccount / groups.length;
 
 	groups.forEach((group) => {
 		chartData.push({ name: `${group}'s earnings`, value: groupEarning });
