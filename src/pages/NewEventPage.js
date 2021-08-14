@@ -51,7 +51,7 @@ export default function NewEventPage() {
 	const handleSubmit = async () => {
 		setSubmitting(true);
 		try {
-			let { data } = await EventsApi.createOne(form);
+			await EventsApi.createOne(form);
 			router.push(`/events`);
 		} catch (error) {
 			console.log(error);

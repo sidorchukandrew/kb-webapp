@@ -51,7 +51,7 @@ export default function EventDetailPage() {
 						</IconButton>
 					</span>
 				</Title>
-				<EventDetails event={event} />
+				<EventDetails event={event} onEventUpdated={setEvent} />
 				<EditEventDialog
 					event={event}
 					open={editing}

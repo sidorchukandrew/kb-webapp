@@ -3,16 +3,30 @@ import { useEffect, useState } from "react";
 
 import CalculationsChart from "./CalculationsChart";
 import Card from "./Card";
+import { Checkbox } from "@material-ui/core";
 import Data from "./Data";
 import EarningsTable from "./EarningsTable";
+import EventsApi from "../api/EventsApi";
 
-export default function EventDetails({ event }) {
+export default function EventDetails({ event, onEventUpdated }) {
 	const [calculations, setCalculations] = useState(() => performCalculations(event));
 
 	useEffect(() => {
-		console.log("Redoing calculations");
 		setCalculations(performCalculations(event));
 	}, [event]);
+
+	const handleUpdatePaidOut = async () => {
+		try {
+			onEventUpdated({ ...event, is_paid_out: !event.is_paid_out });
+
+			let { data } = await EventsApi.updateOne(event.id, { is_paid_out: !event.is_paid_out });
+			data.users = data.users?.map((user) => user.username);
+			data.workers = data.users;
+			onEventUpdated(data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	if (event) {
 		return (
@@ -20,6 +34,10 @@ export default function EventDetails({ event }) {
 				<Card title="Details" className="mb-4">
 					<Data label="Date:" data={new Date(event.event_date).toDateString()} />
 					<Data label="Workers:" data={event.users.join(", ")} />
+					<Data
+						label="Workers have been paid:"
+						data={<Checkbox checked={event.is_paid_out} onChange={handleUpdatePaidOut} />}
+					/>
 				</Card>
 				<Card title="Financials">
 					<Data label="Total revenue:" data={"$ " + formatCurrency(event.revenue)} />

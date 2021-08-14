@@ -1,7 +1,14 @@
-import { Table, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import {
+	Checkbox,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+} from "@material-ui/core";
 
 import { Link } from "react-router-dom";
-import { TableBody } from "@material-ui/core";
 import { formatCurrency } from "../utils/financial";
 import { getNamesFromUsers } from "../utils/models";
 
@@ -11,6 +18,7 @@ export default function EventsTable({ events }) {
 			<Table>
 				<TableHead>
 					<TableRow>
+						<TableCell>Paid Out</TableCell>
 						<TableCell>Date</TableCell>
 						<TableCell>Description</TableCell>
 						<TableCell>Revenue</TableCell>
@@ -22,6 +30,9 @@ export default function EventsTable({ events }) {
 				<TableBody>
 					{events.map((event) => (
 						<TableRow key={event.id} hover>
+							<TableCell>
+								<Checkbox checked={event.is_paid_out} disabled />
+							</TableCell>
 							<TableCell scope="row">
 								<Link to={`/events/${event.id}`}>{new Date(event.event_date).toDateString()}</Link>
 							</TableCell>

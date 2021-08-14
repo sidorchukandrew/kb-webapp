@@ -1,12 +1,8 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 
-import EventDetailPage from "./pages/EventDetailPage";
-import EventsIndexPage from "./pages/EventsIndexPage";
-import HomePage from "./pages/HomePage";
-import Layout from "./components/Layout";
 import LoginPage from "./pages/LoginPage";
-import NewEventPage from "./pages/NewEventPage";
+import SecuredRoutes from "./components/SecuredRoutes";
 
 const theme = createTheme({
 	palette: {
@@ -28,22 +24,7 @@ function App() {
 						<Route path="/login" exact>
 							<LoginPage />
 						</Route>
-						<Layout>
-							<Switch>
-								<Route path="/events" exact>
-									<EventsIndexPage />
-								</Route>
-								<Route path="/events/new" exact>
-									<NewEventPage />
-								</Route>
-								<Route path="/events/:id" exact>
-									<EventDetailPage />
-								</Route>
-								<Route path="/" exact>
-									<HomePage />
-								</Route>
-							</Switch>
-						</Layout>
+						<SecuredRoutes />
 					</Switch>
 				</ThemeProvider>
 			</Router>
