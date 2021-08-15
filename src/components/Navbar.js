@@ -28,12 +28,12 @@ export default function Navbar() {
 	return (
 		<AppBar color="secondary" position="static">
 			<Toolbar>
-				<div className="flex-between w-full">
-					<div>
+				<div className="flex-between w-full overflow-x-auto whitespace-nowrap">
+					<span>
 						<NavbarLink to="/">Home</NavbarLink>
 						<NavbarLink to="/events">Events</NavbarLink>
 						<NavbarLink to="/expenses">Expenses</NavbarLink>
-					</div>
+					</span>
 					<Button variant="outlined" className={classes.colors} onClick={handleLogout}>
 						Log Out
 					</Button>

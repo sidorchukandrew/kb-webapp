@@ -52,6 +52,7 @@ export default function Dashboard({ data }) {
 					</div>
 				</div>
 			</Card>
+			<Card title="Other's Earnings" className="mb-4"></Card>
 		</>
 	);
 }
