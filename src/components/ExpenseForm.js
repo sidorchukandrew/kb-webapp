@@ -13,12 +13,12 @@ export default function ExpenseForm({ form, onFormChange, children }) {
 				type="number"
 				icon="$"
 				value={form.amount ? form.amount : ""}
-				onChange={(e) => handleFieldChange("amount", e.target.value)}
+				onChange={(e) => handleFieldChange("amount", e)}
 			/>
 			<FormField
 				label="Description"
 				value={form.description ? form.description : ""}
-				onChange={(e) => handleFieldChange("description", e.target.value)}
+				onChange={(e) => handleFieldChange("description", e)}
 				type="text"
 			/>
 			<FormField
