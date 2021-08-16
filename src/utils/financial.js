@@ -1,6 +1,21 @@
 export function performCalculations(form) {
 	let calculations = {};
 
+	if (hasTax(form)) {
+		if (form.tax_percentage) {
+			calculations.tax = calculatePercentage(form.tax_percentage, form.revenue);
+			calculations.taxLabel = ` (${Number.parseFloat(form.tax_percentage)}%)`;
+		} else {
+			calculations.tax = Number.parseFloat(form.tax_flat_fee);
+			// calculations.taxLabel = ` (flat fee)`;
+			calculations.taxLabel = "";
+		}
+
+		calculations.revenueAfterTax = form.revenue - calculations.tax;
+	} else {
+		calculations.revenueAfterTax = Number.parseFloat(form.revenue);
+	}
+
 	if (hasEventCost(form)) {
 		if (form.event_cost_percentage) {
 			calculations.eventCost = calculatePercentage(form.event_cost_percentage, form.revenue);
@@ -10,9 +25,9 @@ export function performCalculations(form) {
 			calculations.eventCostLabel = ` (flat fee)`;
 		}
 
-		calculations.revenueAfterEventCost = form.revenue - calculations.eventCost;
+		calculations.revenueAfterEventCost = calculations.revenueAfterTax - calculations.eventCost;
 	} else {
-		calculations.revenueAfterEventCost = Number.parseFloat(form.revenue);
+		calculations.revenueAfterEventCost = Number.parseFloat(calculations.revenueAfterTax);
 	}
 
 	if (hasDeliveryFee(form)) {
@@ -47,6 +62,14 @@ export function hasEventCost(form) {
 	);
 }
 
+export function hasTax(form) {
+	return (
+		form &&
+		("tax_percentage" in form || "tax_flat_fee" in form) &&
+		(form.tax_percentage || form.tax_flat_fee)
+	);
+}
+
 export function formatCurrency(number) {
 	number = Number.parseFloat(number);
 	return number?.toFixed(2);
@@ -58,6 +81,10 @@ export function hasDeliveryFee(form) {
 
 export function toChartData(calculations, form) {
 	let chartData = [];
+
+	if ("tax" in calculations) {
+		chartData.push({ name: "Tax", value: Number.parseFloat(calculations.tax) });
+	}
 
 	if ("eventCost" in calculations) {
 		chartData.push({ name: "Event Fee", value: Number.parseFloat(calculations.eventCost) });

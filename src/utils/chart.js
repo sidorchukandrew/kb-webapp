@@ -19,6 +19,7 @@ export function getEarningsChartData(data) {
 
 export function getCompanyTotalsChartData(data) {
 	return [
+		{ name: "Tax", value: Number.parseFloat(data.total_tax) },
 		{ name: "Delivery fees", value: Number.parseFloat(data.total_delivery_fees) },
 		{ name: "Business account", value: Number.parseFloat(data.total_business_account) },
 		{ name: "Event costs", value: Number.parseFloat(data.total_event_costs) },

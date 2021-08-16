@@ -13,6 +13,7 @@ export const FORM_STEP_BUTTONS = {
 };
 
 export const PIE_CHART_COLORS = {
+	Tax: "#ffe904",
 	"Event Fee": "#8a53a5",
 	"Business Account": "#115293",
 	"Delivery fee (Andrew)": "#ff6260",

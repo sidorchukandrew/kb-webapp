@@ -34,6 +34,7 @@ export default function Dashboard({ data }) {
 							label="Business account:"
 							data={"$" + formatCurrency(data.total_business_account)}
 						/>
+						<Data label="Tax:" data={"$" + formatCurrency(data.total_tax)} />
 						<Data label="Delivery fees:" data={"$" + formatCurrency(data.total_delivery_fees)} />
 						<Data label="Event costs:" data={"$" + formatCurrency(data.total_event_costs)} />
 						<Data label="Earnings:" data={"$" + formatCurrency(data.total_earnings)} />

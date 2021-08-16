@@ -20,10 +20,17 @@ export default function NewEventReview({ form }) {
 			<Card title="Financials">
 				<Data label="Total revenue:" data={"$ " + formatCurrency(form.revenue)} />
 
+				{calculations?.tax && (
+					<Data
+						label={`Tax ${calculations.taxLabel}:`}
+						data={"$ " + formatCurrency(calculations?.tax)}
+					/>
+				)}
+
 				{calculations?.eventCost && (
 					<Data
 						label={`Event cost ${calculations.eventCostLabel}:`}
-						data={"$" + formatCurrency(calculations?.eventCost)}
+						data={"$ " + formatCurrency(calculations?.eventCost)}
 					/>
 				)}
 
@@ -41,7 +48,7 @@ export default function NewEventReview({ form }) {
 
 				<Data
 					label="Earnings:"
-					data={"$" + formatCurrency(calculations?.revenueAfterBusinessAccount)}
+					data={"$ " + formatCurrency(calculations?.revenueAfterBusinessAccount)}
 				/>
 
 				<EarningsTable form={form} calculations={calculations} />

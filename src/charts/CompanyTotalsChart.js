@@ -26,9 +26,10 @@ export default function CompanyTotalsChart({ data }) {
 }
 
 const COLORS = {
-	0: "#ffa600",
-	1: "#8a53a5",
-	2: "#e95d6a",
-	3: "#115293",
-	4: "red",
+	0: "#ffe904",
+	1: "#ffa600",
+	2: "#8a53a5",
+	3: "#e95d6a",
+	4: "#115293",
+	5: "red",
 };

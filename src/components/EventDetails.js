@@ -41,6 +41,12 @@ export default function EventDetails({ event, onEventUpdated }) {
 				</Card>
 				<Card title="Financials">
 					<Data label="Total revenue:" data={"$ " + formatCurrency(event.revenue)} />
+					{calculations?.tax && (
+						<Data
+							label={`Tax ${calculations.taxLabel}:`}
+							data={"$ " + formatCurrency(calculations?.tax)}
+						/>
+					)}
 					{calculations?.eventCost && (
 						<Data
 							label={`Event cost ${calculations.eventCostLabel}:`}

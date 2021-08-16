@@ -1,5 +1,5 @@
 import { OWNERS, WORKERS } from "../utils/constants";
-import { hasDeliveryFee, hasEventCost } from "../utils/financial";
+import { hasDeliveryFee, hasEventCost, hasTax } from "../utils/financial";
 
 import FormField from "./FormField";
 import FormSelect from "./FormSelect";
@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export default function EventForm({ form, onFieldChange, onFormChange, onFieldDeleted }) {
 	const [hiddenFields, setHiddenFields] = useState(() => {
-		return { delivery: !hasDeliveryFee(form), event_cost: !hasEventCost(form) };
+		return { delivery: !hasDeliveryFee(form), event_cost: !hasEventCost(form), tax: !hasTax(form) };
 	});
 
 	const handleToggleHiddenField = (field) => {
@@ -54,6 +54,31 @@ export default function EventForm({ form, onFieldChange, onFormChange, onFieldDe
 				value={form.revenue ? form.revenue : ""}
 				icon="$"
 			/>
+			<HideableField
+				label="Tax"
+				hidden={hiddenFields.tax}
+				onToggle={() => handleToggleHiddenField("tax")}
+			>
+				<div className="grid sm:flex sm:items-center sm:justify-between gap-2 sm:gap-6">
+					<FormField
+						label="Flat fee"
+						type="number"
+						onChange={(e) => onFieldChange("tax_flat_fee", e)}
+						value={form.tax_flat_fee ? form.tax_flat_fee : ""}
+						icon="$"
+						className="mb-0"
+					/>
+					{/* <div className="flex-center my-3 sm:my-0">OR</div>
+					<FormField
+						label="Percentage of total"
+						type="number"
+						onChange={(e) => onFieldChange("tax_percentage", e)}
+						value={form.tax_percentage ? form.tax_percentage : ""}
+						icon="%"
+						className="mb-0"
+					/> */}
+				</div>
+			</HideableField>
 			<HideableField
 				label="Event Cost"
 				hidden={hiddenFields.event_cost}
