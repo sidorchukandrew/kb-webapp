@@ -8,5 +8,5 @@ export function constructAuthHeader() {
 }
 
 export function isFirstLogin(user) {
-	return user.number_of_logins <= 2;
+	return user.number_of_logins <= 1;
 }
