@@ -5,6 +5,7 @@ import AuthApi from "../api/AuthApi";
 import { CircularProgress } from "@material-ui/core";
 import EventDetailPage from "../pages/EventDetailPage";
 import EventsIndexPage from "../pages/EventsIndexPage";
+import ExpenseDetailPage from "../pages/ExpenseDetailPage";
 import ExpensesIndexPage from "../pages/ExpensesIndexPage";
 import HomePage from "../pages/HomePage";
 import Layout from "./Layout";
@@ -59,6 +60,9 @@ export default function SecuredRoutes() {
 					</Route>
 					<Route path="/expenses/new" exact>
 						<NewExpensePage />
+					</Route>
+					<Route path="/expenses/:id" exact>
+						<ExpenseDetailPage />
 					</Route>
 					<Route path="/" exact>
 						<HomePage />

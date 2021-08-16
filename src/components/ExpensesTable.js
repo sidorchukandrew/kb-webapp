@@ -8,6 +8,7 @@ import {
 	useMediaQuery,
 } from "@material-ui/core";
 
+import { Link } from "react-router-dom";
 import { formatCurrency } from "../utils/financial";
 import { toDate } from "../utils/date";
 
@@ -27,10 +28,20 @@ export default function ExpensesTable({ expenses }) {
 				<TableBody>
 					{expenses?.map((expense) => (
 						<TableRow key={expense.id}>
-							<TableCell>{"$" + formatCurrency(expense.amount)}</TableCell>
-							<TableCell>{toDate(expense.expense_date)}</TableCell>
-							<TableCell>{expense.description}</TableCell>
-							{!isSmallScreen && <TableCell>{expense.channel}</TableCell>}
+							<TableCell>
+								<Link to={`/expenses/${expense.id}`}>{"$" + formatCurrency(expense.amount)}</Link>
+							</TableCell>
+							<TableCell>
+								<Link to={`/expenses/${expense.id}`}>{toDate(expense.expense_date)}</Link>
+							</TableCell>
+							<TableCell>
+								<Link to={`/expenses/${expense.id}`}>{expense.description}</Link>
+							</TableCell>
+							{!isSmallScreen && (
+								<TableCell>
+									<Link to={`/expenses/${expense.id}`}>{expense.channel}</Link>
+								</TableCell>
+							)}
 						</TableRow>
 					))}
 				</TableBody>
