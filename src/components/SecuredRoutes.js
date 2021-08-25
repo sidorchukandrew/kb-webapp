@@ -2,6 +2,7 @@ import { Route, Switch, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import AuthApi from "../api/AuthApi";
+import CalendarPage from "../pages/CalendarPage";
 import { CircularProgress } from "@material-ui/core";
 import EventDetailPage from "../pages/EventDetailPage";
 import EventsIndexPage from "../pages/EventsIndexPage";
@@ -63,6 +64,9 @@ export default function SecuredRoutes() {
 					</Route>
 					<Route path="/expenses/:id" exact>
 						<ExpenseDetailPage />
+					</Route>
+					<Route path="/calendar" exact>
+						<CalendarPage />
 					</Route>
 					<Route path="/" exact>
 						<HomePage />
