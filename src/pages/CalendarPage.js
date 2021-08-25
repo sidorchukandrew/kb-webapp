@@ -26,7 +26,8 @@ export default function CalendarPage() {
 		<div className="mb-4">
 			<Title>Calendar</Title>
 			<Calendar
-				onNewEvent={(date) => setNewEventConfig({ open: true, date: date })}
+				// onNewEvent={(date) => setNewEventConfig({ open: true, date: date })}
+				onNewEvent={(date) => setNewEventConfig({ open: false, date: date })}
 				events={events}
 			/>
 			<NewCalendarEventDialog
